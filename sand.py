@@ -11,13 +11,13 @@ from sys import exit
 pygame.init()
 pygame.display.set_caption('sandtest')
 
-width, height = 1200, 1200
-screen = pygame.display.set_mode((height, width))
+width, height = 1200, 600
+screen = pygame.display.set_mode((width, height))
 
 bg = 25, 25, 25
 screen.fill(bg)
 
-nxC, nyC = 200, 200
+nxC, nyC = 200, 100
 dimCW = width / nxC
 dimCH = height / nyC
 gameState = np.zeros((nxC, nyC))
@@ -30,6 +30,11 @@ while True:
     screen.fill(bg)
 
     ev = pygame.event.get()
+
+    # Constant grain generator
+    genX = int(np.floor(nxC / 2))
+    if gameState[genX, 0] == 0:
+        newGameState[genX, 0] = 1
 
     for event in ev:
         if event.type == pygame.KEYDOWN:
